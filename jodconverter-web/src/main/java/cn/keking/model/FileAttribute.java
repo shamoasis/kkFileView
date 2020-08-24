@@ -20,6 +20,8 @@ public class FileAttribute {
 
     private String auth;
 
+    private Integer ts;
+
     public FileAttribute() {
     }
 
@@ -35,6 +37,11 @@ public class FileAttribute {
     public FileAttribute(FileType type, String suffix, String name, String url, String decodedUrl, String httpMethod, String auth) {
         this(type, suffix, name, url, decodedUrl, httpMethod);
         this.auth = auth;
+    }
+
+    public FileAttribute(FileType type, String suffix, String name, String url, String decodedUrl, String httpMethod, String auth, Integer ts) {
+        this(type, suffix, name, url, decodedUrl, httpMethod, auth);
+        this.ts = ts;
     }
 
     public FileType getType() {
@@ -91,5 +98,13 @@ public class FileAttribute {
 
     public void setAuth(String auth) {
         this.auth = auth;
+    }
+
+    public Integer getTs() {
+        return ts;
+    }
+
+    public void setTs(Integer ts) {
+        this.ts = ts;
     }
 }

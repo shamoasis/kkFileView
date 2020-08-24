@@ -363,6 +363,7 @@ public class FileUtils {
         FileType type;
         String suffix;
         String httpMethod = "GET";
+        Integer ts = 0;
 
         Map<String, String> params = getUrlParameterReg(decodedUrl);
         String fullFileName = params.getOrDefault("fullfilename", "");
@@ -379,8 +380,16 @@ public class FileUtils {
         if (!StringUtils.isEmpty(method)) {
             httpMethod = method;
         }
+        String timestamp = params.getOrDefault("ts", "");
+        if (!StringUtils.isEmpty(timestamp)) {
+            try {
+                ts = Integer.parseInt(timestamp);
+            } catch (Exception e) {
+                log.error("ts解码失败");
+            }
+        }
         String auth = params.getOrDefault("auth", "");
-        return new FileAttribute(type, suffix, fileName, url, decodedUrl, httpMethod, auth);
+        return new FileAttribute(type, suffix, fileName, url, decodedUrl, httpMethod, auth, ts);
     }
 
     public FileAttribute getFileAttribute(String url, HttpServletRequest request) {
